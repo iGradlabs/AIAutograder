@@ -1,6 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 import pyrebase
+import firebase_admin
+from firebase_admin import credentials, db
+
 config={
   'apiKey': "AIzaSyCJW1arUPVjgJRxLYfhX9vbztByaUytAOM",
   'authDomain': "agt1-16b90.firebaseapp.com",
@@ -16,6 +19,13 @@ firebase = pyrebase.initialize_app(config)
 db=firebase.database()
 auth=firebase.auth()
 
+
+# cred = credentials.Certificate("credentials.json")
+# firebase_admin.initialize_app(cred, {
+#       'databaseURL':" https://agt1-16b90-default-rtdb.asia-southeast1.firebasedatabase.app/"
+
+# })
+
 def create_db(data):
     # db.child("company_users").child(data["username"]).set(data)
 
@@ -29,16 +39,55 @@ def create_db(data):
         db.child("company_users").child(data["username"]).set(data)
         print("Username does not exist.")
 
+def display_data():
+    # Get the data from the Realtime Database
+    users = db.child("company_users")
+    users_data = users.get().val()
+    return users_data
 
-def create_user_id(user_data):
+
+def approve(action,user_id):
+
+    if action == 'approve':
+        print("sssssssssssssssssssssssssssssssssssssssssssssss")
+        db.child("company_users").child(user_id).update({"status": "approved"})
+        return True
+
+    elif action == 'reject':
+        db.child("company_users").child(user_id).update({"status": "rejected"})
+
+        # db.child("users").child(user_id).remove()
+        return False
+    else:
+        return "invalid option"
+        
+
+def create_user_id(email,password):  
         try:
-            user = auth.create_user_with_email_and_password(user_data["email"],user_data["password"])
+            user = auth.create_user_with_email_and_password(email,password)
             print("User created successfully.")
             return user
         except Exception as e:
             print("Error creating user:", str(e))
             return None
 
+
+def sign_in(email,password):
+    try:
+        user = auth.sign_in_with_email_and_password(email,password)
+        print(user)
+        return True
+    except Exception as e:
+        print("Error creating user:", str(e))
+        return False
+        
+def forgot_password(email):
+    try:
+        user=auth.send_password_reset_email(email)
+        print("Request send to mail")
+        return True
+    except Exception as e:
+        print('error',str(e))
 
 def send_mail(data):
 
@@ -49,7 +98,7 @@ def send_mail(data):
     # Set up the email message
     sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
     sender_password="fvam btzk exbf ivxz"
-    receiver_email = "ktraveendran25@gmail.com"#consided as rep
+    receiver_email = "ktraveendran25@gmail.com"#consided as college
     subject = "New user sign-up request"
     message =f"Username: {data['username']}\nEmail: {data['email']}"
 
@@ -69,5 +118,33 @@ def send_mail(data):
     server.sendmail(sender_email, receiver_email, msg.as_string())
     server.quit()
     # Send the email
+
+
+
+
+# user_data = {
+#         "username": "shymeaah",
+#         "email": "shyam113232",
+#         "password": "sddfgteow3784ry89723yr78w34ry w47890rty780w3gryq3"
+#         }
+# create_db(user_data)
+# # display_data()
+
+
+
+
+
+# username="sweiufhjs"
+# email= "shaa@gmail.com"
+# password="123456789987654321"
+
+
+# s=sign_in(email,password)
+# if sign_in(email,password)==True:
+#     print("user signed is")
+
+
+
+
 
 

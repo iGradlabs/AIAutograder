@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.css') }}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfect-scrollbar.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/apex-charts.css') }}" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="{{ url_for('static', filename='js/helpers.js') }}"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <h1>{{usersData}}</h1>
+    <div class="text-danger">
+      {% for user_id, user_info in usersData.items(): %}
+          <h1>{{user_id}}</h3>
+          <h3>{{user_info.get('email')}}</h3>
+          <h4>{{user_info.get('username')}}</h4>
+          <h5>{{user_info.get('email')}}</h5>
+          <a href="{{ url_for('process_user', action='approve', user_id=user_id, email = user_info.get('email'), password = user_info.get('username')) }}">Approve</a> |
+          <a href="{{ url_for('process_user', action='reject', user_id=user_id  , email = user_info.get('email'), password = user_info.get('username')) }}">Reject</a>
+
+  {% endfor %}
+
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/perfect-scrollbar.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="{{ url_for('static', filename='js/apexcharts.js') }}"></script>
+
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- Page JS -->
+    <script src="{{ url_for('static', filename='js/dashboards-analytics.js') }}"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
