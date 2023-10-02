@@ -48,6 +48,7 @@ def send_mail(data):
 
     # Set up the email message
     sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
+    sender_password="fvam btzk exbf ivxz"
     receiver_email = "ktraveendran25@gmail.com"#consided as rep
     subject = "New user sign-up request"
     message =f"Username: {data['username']}\nEmail: {data['email']}"
@@ -64,7 +65,7 @@ def send_mail(data):
     # Send the email
     server = smtplib.SMTP(smtp_server, smtp_port)
     server.starttls()
-    server.login(sender_email, "fvam btzk exbf ivxz")
+    server.login(sender_email, sender_password)
     server.sendmail(sender_email, receiver_email, msg.as_string())
     server.quit()
     # Send the email
