@@ -62,8 +62,8 @@
           <h3>{{user_info.get('email')}}</h3>
           <h4>{{user_info.get('username')}}</h4>
           <h5>{{user_info.get('email')}}</h5>
-          <a href="{{ url_for('process_user', action='approve', user_id=user_id, email = user_info.get('email'), password = user_info.get('username')) }}">Approve</a> |
-          <a href="{{ url_for('process_user', action='reject', user_id=user_id  , email = user_info.get('email'), password = user_info.get('username')) }}">Reject</a>
+          <a href="{{ url_for('process_user', action='approve', user_id=user_id, email = user_info.get('email'), password = user_info.get('password')) }}">Approve</a> |
+          <a href="{{ url_for('process_user', action='reject', user_id=user_id  , email = user_info.get('email'), password = user_info.get('password')) }}">Reject</a>
 
   {% endfor %}
 

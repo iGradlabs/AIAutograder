@@ -1,8 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 import pyrebase
-import firebase_admin
-from firebase_admin import credentials, db
+
 
 config={
   'apiKey': "AIzaSyCJW1arUPVjgJRxLYfhX9vbztByaUytAOM",
@@ -20,74 +19,6 @@ db=firebase.database()
 auth=firebase.auth()
 
 
-# cred = credentials.Certificate("credentials.json")
-# firebase_admin.initialize_app(cred, {
-#       'databaseURL':" https://agt1-16b90-default-rtdb.asia-southeast1.firebasedatabase.app/"
-
-# })
-
-def create_db(data):
-    # db.child("company_users").child(data["username"]).set(data)
-
-    users=db.child("company_users")#LIST OF USERS ADDED IN THE REALTIME DATABASE
-    users_data = users.get().val()
-    # print(users_data)
-
-    if users_data is not None and data["username"] in users_data:
-        print("Username exists.")
-    else:
-        db.child("company_users").child(data["username"]).set(data)
-        print("Username does not exist.")
-
-def display_data():
-    # Get the data from the Realtime Database
-    users = db.child("company_users")
-    users_data = users.get().val()
-    return users_data
-
-
-def approve(action,user_id):
-
-    if action == 'approve':
-        print("sssssssssssssssssssssssssssssssssssssssssssssss")
-        db.child("company_users").child(user_id).update({"status": "approved"})
-        return True
-
-    elif action == 'reject':
-        db.child("company_users").child(user_id).update({"status": "rejected"})
-
-        # db.child("users").child(user_id).remove()
-        return False
-    else:
-        return "invalid option"
-        
-
-def create_user_id(email,password):  
-        try:
-            user = auth.create_user_with_email_and_password(email,password)
-            print("User created successfully.")
-            return user
-        except Exception as e:
-            print("Error creating user:", str(e))
-            return None
-
-
-def sign_in(email,password):
-    try:
-        user = auth.sign_in_with_email_and_password(email,password)
-        print(user)
-        return True
-    except Exception as e:
-        print("Error creating user:", str(e))
-        return False
-        
-def forgot_password(email):
-    try:
-        user=auth.send_password_reset_email(email)
-        print("Request send to mail")
-        return True
-    except Exception as e:
-        print('error',str(e))
 
 def send_mail(data):
 
@@ -119,6 +50,66 @@ def send_mail(data):
     server.quit()
     # Send the email
 
+def create_db(data):
+    # db.child("company_users").child(data["username"]).set(data)
+
+    users=db.child("company_users")#LIST OF USERS ADDED IN THE REALTIME DATABASE
+    users_data = users.get().val()
+    # print(users_data)
+
+    if users_data is not None and data["username"] in users_data:
+        print("Username exists.")
+    else:
+        data["status"]="None"
+        db.child("company_users").child(data["username"]).set(data)
+        print("Username does not exist.")
+
+def approve(action,user_id):
+
+    if action == 'approve':
+        print("sssssssssssssssssssssssssssssssssssssssssssssss")
+        db.child("company_users").child(user_id).update({"status": "approved"})
+        return True
+
+    elif action == 'reject':
+        db.child("company_users").child(user_id).update({"status": "rejected"})
+
+        # db.child("users").child(user_id).remove()
+        return False
+    else:
+        return "invalid option"
+    
+def display_data():
+    # Get the data from the Realtime Database
+    users = db.child("company_users")
+    users_data = users.get().val()
+    return users_data
+
+def create_user_id(email,password):  
+        try:
+            user = auth.create_user_with_email_and_password(email,password)
+            print("User created successfully.")
+            return user
+        except Exception as e:
+            print("Error creating user:", str(e))
+            return None
+
+def sign_in(email,password):
+    try:
+        user = auth.sign_in_with_email_and_password(email,password)
+        print(user)
+        return True
+    except Exception as e:
+        print("Error creating user:", str(e))
+        return False
+        
+def forgot_password(email):
+    try:
+        user=auth.send_password_reset_email(email)
+        print("Request send to mail")
+        return True
+    except Exception as e:
+        print('error',str(e))
 
 
 

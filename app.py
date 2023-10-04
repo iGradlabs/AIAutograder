@@ -18,13 +18,14 @@ def sign_up():
         username=request.form['username']
         email=request.form['email']
         password=request.form['password']
+        # confirmPassword=request.form['con_password']
+
 
         user_data = {
         "username": username,
         "email": email,
         "password": password
         }
-        print (user_data)
 
         email_send.send_mail(user_data)
         email_send.create_db(user_data)
@@ -61,11 +62,11 @@ def admin_auth():
 
 @app.route('/process/<action>/<user_id>/<email>/<password>')
 def process_user(action, user_id,email,password):
-    # approvel=email_send.approve(action,user_id)
-    # if approvel ==True:
-    #     # print("fijueswdhbfiupfbheprswiufbhneriopu9fgbeofgberdiogubdaels;geajorsbgoelbgeil")
-    #     email_send.create_user_id(email,password)
-    print(action,user_id,email,password)
+    approvel=email_send.approve(action,user_id)
+    if approvel ==  True:
+        # print("fijueswdhbfiupfbheprswiufbhneriopu9fgbeofgberdiogubdaels;geajorsbgoelbgeil")
+        email_send.create_user_id(email,password)
+        print(action,email,password)
 
     return redirect('/admin-auth')
 
