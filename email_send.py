@@ -97,7 +97,10 @@ def create_user_id(email,password):
 def sign_in(email,password):
     try:
         user = auth.sign_in_with_email_and_password(email,password)
-        print(user)
+        # print(type(user))
+        admin=user["email"]
+        if admin=='t.r.shyam0007@gmail.com':
+            return admin
         return True
     except Exception as e:
         print("Error creating user:", str(e))
@@ -113,6 +116,9 @@ def forgot_password(email):
 
 
 
+
+# s=sign_in("t.r.shyam0007@gmail.com","shyam1134")
+# print(s)
 # user_data = {
 #         "username": "shymeaah",
 #         "email": "shyam113232",
@@ -133,9 +139,4 @@ def forgot_password(email):
 # s=sign_in(email,password)
 # if sign_in(email,password)==True:
 #     print("user signed is")
-
-
-
-
-
 

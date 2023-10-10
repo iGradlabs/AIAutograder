@@ -40,16 +40,17 @@ def sign_in():
         password=request.form['password']
         print(email,password)
         # s=email_send.sign_in(email,password)
-        # print(s)
-        if email!='t.r.shyam0007@gmail.com':
-            valid_credentiaols=email_send.sign_in(email,password)
-            if valid_credentiaols==True:
-                return redirect(url_for('index'))
-            else:
-                error_message = "Invalid login credentials. Please try again."
-                return render_template('auth-login-basic.html', error=error_message)
+        
+        valid_credentiaols=email_send.sign_in(email,password)
+        if valid_credentiaols==True:#user page
+            return redirect(url_for('index'))
+        
+        elif valid_credentiaols=="t.r.shyam0007@gmail.com":#admin email
+            return redirect(url_for('admin_auth'))
         else:
-             return redirect(url_for('admin_auth'))
+            error_message = "Invalid login credentials. Please try again."
+            return render_template('auth-login-basic.html', error=error_message)
+        
     return render_template('auth-login-basic.html')
 
 
@@ -87,6 +88,10 @@ def forgot_password():
 
     return render_template("auth-forgot-password-basic.html")
 
+
+@app.route('/password')
+def passwordPage():
+    return render_template('password.html')
 # @app.route("/sign-out", methods=['GET'])
 # def sign_out():
 #     # Clear the user's session to sign them out
