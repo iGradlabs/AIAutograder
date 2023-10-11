@@ -134,6 +134,7 @@ span.psw {
 <body>
 
 <h2>Frame Query!</h2>
+<h1>{{q1}}</h1>
 
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Clik Me!</button>
 
@@ -147,24 +148,24 @@ span.psw {
 
     <div class="container">
       <h3>Time For Your Questions!</h3>
-      <label for="ques"><b>Query 1</b></label>
-      <input type="text" placeholder="Put Your Question" name="Ques" required>
+      <form action="" method="post">
+        <label for="ques"><b>Query 1</b></label>
+        <input type="text" placeholder="Put Your Question" name="Q1" required>
 
-      <label for="ques"><b>Query 2</b></label>
-      <input type="text" placeholder="Put Your Question" name="Ques" required>
+        <label for="ques"><b>Query 2</b></label>
+        <input type="text" placeholder="Put Your Question" name="Q2" required>
 
-      <label for="ques"><b>Query 3</b></label>
-      <input type="text" placeholder="Put Your Question" name="Ques" required>
+        <label for="ques"><b>Query 3</b></label>
+        <input type="text" placeholder="Put Your Question" name="Q3" required>
 
-      <label for="ques"><b>Query 4</b></label>
-      <input type="text" placeholder="Put Your Question" name="Ques" required>
+        <label for="ques"><b>Query 4</b></label>
+        <input type="text" placeholder="Put Your Question" name="Q4" required>
 
-      <label for="psw"><b>Query 5</b></label>
-      <input type="text" placeholder="Put Your Question" name="Ques" required>
-        
-      <!--button type="submit">SUBMIT</button//-->
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="submitbtn">SUBMIT</button>
-
+        <label for="psw"><b>Query 5</b></label>
+        <input type="text" placeholder="Put Your Question" name="Q5" required>
+      </form>
+        <!--button type="submit">SUBMIT</button//-->
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="submitbtn">SUBMIT</button>
       <style>
         body {
           background-image: url('bgi.jpg');
