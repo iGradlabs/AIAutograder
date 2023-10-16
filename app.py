@@ -17,18 +17,20 @@ def sign_up():
     if request.method == 'POST':
         username=request.form['username']
         email=request.form['email']
-        password=request.form['password']
-        # confirmPassword=request.form['con_password']
-
+        company_name=request.form['company_name']
+        requter_name=request.form['requter_name']
+        company_id=request.form['company_id']
 
         user_data = {
         "username": username,
         "email": email,
-        "password": password
+        "company_name":company_name,
+        "requter_name":requter_name,
+        "company_id":company_id
         }
-
-        email_send.send_mail(user_data)
         email_send.create_db(user_data)
+        email_send.send_mail(user_data)
+        
 
     return render_template('auth-register-basic.html')
 
@@ -60,15 +62,34 @@ def admin_auth():
     usersData=email_send.display_data()
     return render_template('admin-auth.html',usersData=usersData)
 
+@app.route('/password',methods=['POST','GET'])
+def passwordPage():
+    # if request.method == 'GET':
+    #     email=request.args.get('email')
+    #     print("defhiugewaiufgh",email)
+    message = ""  
+    if request.method == 'POST':
+        print("heyyyyyyyyyyyyyyyy")
+        password=request.form['password']
+        ConPassword=request.form['ConformPassword']
+        if password==ConPassword:
+            email=request.args.get('email')
+            authPassword=password
+            email_send.create_user_id(email,password)
+            print(email,authPassword)
+            return redirect("/auth-login-basic.html")
+        else:
+            message="different match on password"
+            
+    return render_template('password.html',error=message)
 
-@app.route('/process/<action>/<user_id>/<email>/<password>')
-def process_user(action, user_id,email,password):
+@app.route('/process/<action>/<user_id>/<email>')
+def process_user(action, user_id,email):
     approvel=email_send.approve(action,user_id)
     if approvel ==  True:
-        # print("fijueswdhbfiupfbheprswiufbhneriopu9fgbeofgberdiogubdaels;geajorsbgoelbgeil")
-        email_send.create_user_id(email,password)
-        print(action,email,password)
-
+        email_send.sendMail_requi(email)
+    else:
+        print("hey you Fbi open up the door")
     return redirect('/admin-auth')
 
 
@@ -89,9 +110,7 @@ def forgot_password():
     return render_template("auth-forgot-password-basic.html")
 
 
-@app.route('/password')
-def passwordPage():
-    return render_template('password.html')
+
 # @app.route("/sign-out", methods=['GET'])
 # def sign_out():
 #     # Clear the user's session to sign them out

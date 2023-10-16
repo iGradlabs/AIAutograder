@@ -31,7 +31,7 @@ def send_mail(data):
     sender_password="fvam btzk exbf ivxz"
     receiver_email = "ktraveendran25@gmail.com"#consided as college
     subject = "New user sign-up request"
-    message =f"Username: {data['username']}\nEmail: {data['email']}"
+    message =f"Username: {data['username']}\nEmail: {data['email']}\nCompany Name:{data['company_name']}\n Requter Name:{data['requter_name']}\nCompanyId:{data['company_id']} http://127.0.0.1:5000/admin-auth"
 
 
     #<<<----- Set up the MIME message ---->>>
@@ -49,6 +49,35 @@ def send_mail(data):
     server.sendmail(sender_email, receiver_email, msg.as_string())
     server.quit()
     # Send the email
+
+def sendMail_requi(email):
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+    reciverMail=email
+
+
+    sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
+    sender_password="fvam btzk exbf ivxz"
+    receiver_email = reciverMail #consided as college
+    # print(receiver_email)
+    subject = "New user sign-up request"
+    message=f"'yOU CAN ABLE TO SET PASSWORD THROUGH THIS'  http://127.0.0.1:5000/password?email={receiver_email}"
+    print(message)
+    #     #<<<----- Set up the MIME message ---->>>
+    msg = MIMEText(message)
+    msg["Subject"] = subject
+    msg["From"] = sender_email
+    msg["To"] = receiver_email
+    #<<<----- Set up the MIME message ---->>>
+       # Send the email
+    server = smtplib.SMTP(smtp_server, smtp_port)
+    server.starttls()
+    server.login(sender_email, sender_password)
+    server.sendmail(sender_email, receiver_email, msg.as_string())
+    server.quit()
+    # Send the email
+
+    # pass
 
 def create_db(data):
     # db.child("company_users").child(data["username"]).set(data)

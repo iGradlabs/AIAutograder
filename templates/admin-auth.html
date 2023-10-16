@@ -59,11 +59,14 @@
     <div class="text-danger">
       {% for user_id, user_info in usersData.items(): %}
           <h1>{{user_id}}</h3>
-          <h3>{{user_info.get('email')}}</h3>
-          <h4>{{user_info.get('username')}}</h4>
-          <h5>{{user_info.get('email')}}</h5>
-          <a href="{{ url_for('process_user', action='approve', user_id=user_id, email = user_info.get('email'), password = user_info.get('password')) }}">Approve</a> |
-          <a href="{{ url_for('process_user', action='reject', user_id=user_id  , email = user_info.get('email'), password = user_info.get('password')) }}">Reject</a>
+          <h3>company_id={{user_info.get('company_id')}}</h3>
+          <h3>email={{user_info.get('email')}}</h3>
+
+          <h4>company_name= {{user_info.get('company_name')}}</h4>
+          <h5>requter_name={{user_info.get('requter_name')}}</h5>
+
+          <a href="{{ url_for('process_user', action='approve', user_id=user_id, email = user_info.get('email')) }}">Approve</a>
+          <a href="{{ url_for('process_user', action='reject', user_id=user_id  , email = user_info.get('email')) }}">Reject</a> 
 
   {% endfor %}
 
