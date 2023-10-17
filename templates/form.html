@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Information Form</title>
+</head>
+<body>
+    <h1>Enter Information</h1>
+    <form id="infoForm" action="/submit" method="POST">
+        <label for="totalMarks">Total Marks:</label>
+        <input type="number" id="totalMarks" name="totalMarks" required><br><br>
+
+        <label for="mcqQuestionsPercentage">MCQ Questions Percentage:</label>
+        <input type="number" id="mcqQuestionsPercentage" name="mcqQuestionsPercentage" required><br><br>
+
+        <label for="codingQuestionsPercentage">Coding Questions Percentage:</label>
+        <input type="number" id="codingQuestionsPercentage" name="codingQuestionsPercentage" required><br><br>
+
+        <label>Topics:</label><br>
+        <input type="checkbox" id="topic1" name="Arrays" value="Arrays"> Arrays<br>
+        <input type="checkbox" id="topic2" name="Strings" value="Strings"> Strings<br>
+        <input type="checkbox" id="topic3" name="Trees" value="Trees"> Trees<br><br>
+
+        <label for="difficultyLevel">Difficulty Level:</label>
+        <select id="difficultyLevel" name="difficultyLevel" required>
+            <option value="Easy">Easy</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Difficult">Difficult</option>
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
