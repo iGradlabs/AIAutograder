@@ -1,0 +1,4 @@
+flask
+smtplib
+pyrebase4
+Session
