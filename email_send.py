@@ -1,18 +1,25 @@
 import smtplib
 from email.mime.text import MIMEText
 import pyrebase
-
+import json
 
 config={
-  'apiKey': "AIzaSyCJW1arUPVjgJRxLYfhX9vbztByaUytAOM",
-  'authDomain': "agt1-16b90.firebaseapp.com",
-  'projectId': "agt1-16b90",
-  'storageBucket': "agt1-16b90.appspot.com",
-  'messagingSenderId': "356668542049",
-  'appId': "1:356668542049:web:a57f7c56467f8bef51ee20",
-  'measurementId': "G-EXR7R90QRQ",
-  'databaseURL':" https://agt1-16b90-default-rtdb.asia-southeast1.firebasedatabase.app/"
-  }
+  "apiKey": "AIzaSyAUlsLdMJS7q_mdU9RZl4iFZd4yPBUlcXI",
+  "authDomain": "aiauto-7cc64.firebaseapp.com",
+  "databaseURL": "https://aiauto-7cc64-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "projectId": "aiauto-7cc64",
+  "storageBucket": "aiauto-7cc64.appspot.com",
+  "messagingSenderId": "447608317094",
+  "appId": "1:447608317094:web:83634606c2d1800563c067",
+  "measurementId": "G-PCE3YXT91M",
+}
+
+
+# configraw="firebase.json"
+# with open(configraw, "r") as file:
+#     # Load the JSON data into a Python variable
+#     config= json.load(file)
+# print(config)
 
 firebase = pyrebase.initialize_app(config)  
 db=firebase.database()
@@ -96,7 +103,6 @@ def create_db(data):
 def approve(action,user_id):
 
     if action == 'approve':
-        print("sssssssssssssssssssssssssssssssssssssssssssssss")
         db.child("company_users").child(user_id).update({"status": "approved"})
         return True
 
