@@ -39,6 +39,8 @@ def sign_up():
         }
         email_send.create_db(user_data)
         email_send.send_mail(user_data)
+        return redirect('auth-login-basic.html')
+
         
 
     return render_template('auth-register-basic.html')
