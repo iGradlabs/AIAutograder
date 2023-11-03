@@ -59,7 +59,7 @@ def sign_in():
         if valid_credentials:
             session['email'] = email 
             print(session)
-            if email == "t.r.shyam0007@gmail.com": 
+            if email == "t.r.shyam0007@gmail.com" :#  or email == "nakult721@gmail.com": 
                 session['is_admin'] = True
 
             return redirect(url_for('index'))
@@ -133,4 +133,3 @@ def forgot_password():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
