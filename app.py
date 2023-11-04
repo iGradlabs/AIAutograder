@@ -8,10 +8,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'key123123'  # Change this to a secure secret key
 app.config['SESSION_TYPE'] = 'filesystem'#types of session are (filesystem,sqlalchemy,mongodb,redis,memcached)
 
-
-
-
-
 @app.route('/')
 def index():
     if 'email' in session:
@@ -44,9 +40,6 @@ def sign_up():
         
 
     return render_template('auth-register-basic.html')
-
-
-
 
 
 @app.route("/auth-login-basic.html", methods=['POST', 'GET'])
