@@ -3,7 +3,8 @@ import email_send,ed_email
 from flask_session import Session
 
 
-# flask app name
+# flask app namess
+#ahskj
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'key123123'  # Change this to a secure secret key
 app.config['SESSION_TYPE'] = 'filesystem'#types of session are (filesystem,sqlalchemy,mongodb,redis,memcached)
