@@ -1,7 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 import pyrebase
-import json
+import ed_email
+from urllib.parse import quote
+
 
 config={
   "apiKey": "AIzaSyAUlsLdMJS7q_mdU9RZl4iFZd4yPBUlcXI",
@@ -86,19 +88,47 @@ def sendMail_requi(email):
 
     # pass
 
-def create_db(data):
-    # db.child("company_users").child(data["username"]).set(data)
 
-    users=db.child("company_users")#LIST OF USERS ADDED IN THE REALTIME DATABASE
+
+def create_db(data):
+
+    users = db.child("company_users")
     users_data = users.get().val()
-    # print(users_data)
+
+    encode_email=ed_email.encode_email(data["email"])
+    print(encode_email)
+    print(encode_email)
+    print(encode_email)
+    print(encode_email)
+    print(encode_email)
+    print(encode_email)
+    print(encode_email)
+    print(encode_email)
 
     if users_data is not None and data["username"] in users_data:
-        print("Username exists.")
+        print("User with email already exists.")
     else:
-        data["status"]="None"
-        db.child("company_users").child(data["username"]).set(data)
-        print("Username does not exist.")
+        # Set the user data with the encoded email as the key
+        data["status"] = "None"
+        db.child("company_users").child(encode_email).set(data)
+        print("User added successfully.")
+ 
+
+# def create_db(data):
+#     # db.child("company_users").child(data["username"]).set(data)
+
+#     users=db.child("company_users")#LIST OF USERS ADDED IN THE REALTIME DATABASE
+#     users_data = users.get().val()
+#     encoded_email = quote(data["email"], safe="")
+#     print(encoded_email)
+#     print(users_data)
+
+#     if users_data is not None and encoded_email in users_data:
+#         print("Username exists.")
+#     else:
+#         data["status"]="None"
+#         db.child("company_users").child(encoded_email).set(data)
+#         print("Username does not exist.")
 
 def approve(action,user_id):
 
@@ -114,11 +144,17 @@ def approve(action,user_id):
     else:
         return "invalid option"
     
+def user_info(email):
+    # Get the data from the Realtime Database
+    user = db.child("company_users").child(email)
+    user_data = user.get().val()
+    return user_data
+
 def display_data():
     # Get the data from the Realtime Database
-    users = db.child("company_users")
-    users_data = users.get().val()
-    return users_data
+    user = db.child("company_users").child()
+    user_data = user.get().val()
+    return user_data
 
 def create_user_id(email,password):  
         try:

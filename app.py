@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session,flash
-import email_send
+import email_send,ed_email
 from flask_session import Session
 
 
@@ -16,9 +16,15 @@ app.config['SESSION_TYPE'] = 'filesystem'#types of session are (filesystem,sqlal
 def index():
     if 'email' in session:
         print(session)
-        return render_template('index.html')
+        # print(email_send.display_data())
+
+        return render_template('dashboard.html',username=session['user_info']['username'])
     else:
         return redirect(url_for('sign_in'))
+
+    
+
+
 
 @app.route('/auth-register-basic.html',methods=['POST','GET'])
 def sign_up():
@@ -56,13 +62,30 @@ def sign_in():
         password = request.form['password']
         print(email, password)
 
+        #encode & decode email
+        encoded_email= ed_email.encode_email(email)
+        print(encoded_email)
+        user_info=email_send.user_info(encoded_email)
+        #encode & decode email
+
+
+
         valid_credentials = email_send.sign_in(email, password)
 
         if valid_credentials:
-            session['email'] = email 
+            session['email'] = email
+            session['is_admin'] = False
+            session['user_info']=user_info
             print(session)
+            # print(email_send.display_data())
+            
+            print(session)
+
             if email == "t.r.shyam0007@gmail.com": 
+                # print("admibn")
                 session['is_admin'] = True
+                # return redirect(url_for('admin_auth'))
+                return redirect(url_for('index'))
 
             return redirect(url_for('index'))
 
@@ -130,6 +153,28 @@ def forgot_password():
 
 
     return render_template("auth-forgot-password-basic.html")
+
+
+@app.route('/filter_candidates')
+def filter_candidates():
+    return render_template('Filter_candidates.html')
+
+@app.route('/job_posting')
+def job_posting ():
+    return render_template('job_posting.html')
+
+@app.route('/create_learning_path')
+def create_learning_path():
+    return render_template('create_learning_path.html')
+
+@app.route('/notifications')
+def notifications():
+    return render_template('notifications.html')
+
+@app.route('/schedule_interview')
+def schedule_interview():
+    return render_template('schedule_interview.html')
+
 
 
 
