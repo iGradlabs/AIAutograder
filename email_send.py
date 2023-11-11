@@ -38,7 +38,7 @@ def send_mail(data):
     # Set up the email message
     sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
     sender_password="fvam btzk exbf ivxz"
-    receiver_email = "ktraveendran25@gmail.com"#consided as college
+    receiver_email = "nakult721@gmail.com"#consided as college
     subject = "New user sign-up request"
     message =f"Username: {data['username']}\nEmail: {data['email']}\nCompany Name:{data['company_name']}\n Requter Name:{data['requter_name']}\nCompanyId:{data['company_id']} http://127.0.0.1:5000/admin-auth"
 
@@ -210,4 +210,3 @@ def forgot_password(email):
 # s=sign_in(email,password)
 # if sign_in(email,password)==True:
 #     print("user signed is")
-
