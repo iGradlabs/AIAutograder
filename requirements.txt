@@ -1,4 +1,3 @@
-flask
-smtplib
+Flask
 pyrebase4
-Session
+Flask-Session
