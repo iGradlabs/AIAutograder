@@ -3,6 +3,13 @@ from email.mime.text import MIMEText
 import pyrebase
 import ed_email
 from urllib.parse import quote
+import os
+from dotenv import load_dotenv
+load_dotenv()
+reciver_mail_id =  os.getenv("RECIVER_MAIL_ID")
+sender_mail_id = os.getenv("SENDER_MAIL_ID")
+sender_mail_password = os.getenv("SENDER_MAIL_PASSWORD")
+admin_emails = [ str(x) for x in str(os.getenv("ADMIN_MAIL_ID")).split(',')]
 
 
 config={
@@ -36,9 +43,9 @@ def send_mail(data):
     smtp_port = 587
 
     # Set up the email message
-    sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
-    sender_password="fvam btzk exbf ivxz"
-    receiver_email = "ktraveendran25@gmail.com"#consided as college
+    sender_email = sender_mail_id#consided as webpage mail
+    sender_password= sender_mail_password
+    receiver_email = reciver_mail_id
     subject = "New user sign-up request"
     message =f"Username: {data['username']}\nEmail: {data['email']}\nCompany Name:{data['company_name']}\n Requter Name:{data['requter_name']}\nCompanyId:{data['company_id']} http://127.0.0.1:5000/admin-auth"
 
@@ -65,8 +72,8 @@ def sendMail_requi(email):
     reciverMail=email
 
 
-    sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
-    sender_password="fvam btzk exbf ivxz"
+    sender_email = sender_mail_id#consided as webpage mail
+    sender_password= sender_mail_password
     receiver_email = reciverMail #consided as college
     # print(receiver_email)
     subject = "New user sign-up request"
@@ -105,7 +112,7 @@ def create_db(data):
     print(encode_email)
     print(encode_email)
 
-    if users_data is not None and data["username"] in users_data:
+    if users_data is not None and data["username"] in users_data :
         print("User with email already exists.")
     else:
         # Set the user data with the encoded email as the key
@@ -170,7 +177,7 @@ def sign_in(email,password):
         user = auth.sign_in_with_email_and_password(email,password)
         # print(type(user))
         admin=user["email"]
-        if admin=='t.r.shyam0007@gmail.com':
+        if admin in admin_emails:
             return admin
         return True
     except Exception as e:

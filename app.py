@@ -1,13 +1,22 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session,flash
 import email_send,ed_email
 from flask_session import Session
+from dotenv import load_dotenv
+import json
 
+load_dotenv()
+
+# Access the variables
+secret_key = os.getenv("SECRET_KEY")
+session_type = os.getenv("SESSION_TYPE")
+admin_emails = [ str(x) for x in str(os.getenv("ADMIN_MAIL_ID")).split(',')]
 
 # flask app namess
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'key123123'  # Change this to a secure secret key
-app.config['SESSION_TYPE'] = 'filesystem'#types of session are (filesystem,sqlalchemy,mongodb,redis,memcached)
+app.config['SECRET_KEY'] = secret_key  
+app.config['SESSION_TYPE'] =  session_type 
 
 
 
@@ -82,7 +91,8 @@ def sign_in():
             
             print(session)
 
-            if email == "t.r.shyam0007@gmail.com": 
+            if email in admin_emails: # 
+                print(email)
                 # print("admibn")
                 session['is_admin'] = True
                 # return redirect(url_for('admin_auth'))
