@@ -5,6 +5,7 @@ import ed_email
 from urllib.parse import quote
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 reciver_mail_id =  os.getenv("RECIVER_MAIL_ID")
 sender_mail_id = os.getenv("SENDER_MAIL_ID")
@@ -35,7 +36,6 @@ db=firebase.database()
 auth=firebase.auth()
 
 
-
 def send_mail(data):
 
     # Set up the email server
@@ -43,11 +43,21 @@ def send_mail(data):
     smtp_port = 587
 
     # Set up the email message
-    sender_email = sender_mail_id#consided as webpage mail
-    sender_password= sender_mail_password
-    receiver_email = reciver_mail_id
+    sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
+    sender_password="fvam btzk exbf ivxz"
+    receiver_email = "ktraveendran25@gmail.com"#consided as college
     subject = "New user sign-up request"
-    message =f"Username: {data['username']}\nEmail: {data['email']}\nCompany Name:{data['company_name']}\n Requter Name:{data['requter_name']}\nCompanyId:{data['company_id']} http://127.0.0.1:5000/admin-auth"
+    message =f'''
+    Username: {data['first_name']}\n 
+    last_name:{data['last_name']}\n 
+    Email: {data['email']}\n
+    phone_number:{data['phone_number']}\n
+    organization:{data['organization']}\n   
+    zip_code:{data['zip_code']} \n 
+    state:{data['state']} \n 
+    country:{data['country']} 
+    
+    http://127.0.0.1:5000/admin-auth'''
 
 
     #<<<----- Set up the MIME message ---->>>
@@ -66,16 +76,38 @@ def send_mail(data):
     server.quit()
     # Send the email
 
+
 def sendMail_requi(email):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
     reciverMail=email
+    print(reciverMail,"sdioddhjidj")
+    print(reciverMail,"sdioddhjidj")
+    print(reciverMail,"sdioddhjidj")
+    print(reciverMail,"sdioddhjidj")
+    print(reciverMail,"sdioddhjidj")
+    print(email)
+    print(email)
+    print(email)
+    print(email)
+
 
 
     sender_email = sender_mail_id#consided as webpage mail
+    
     sender_password= sender_mail_password
     receiver_email = reciverMail #consided as college
     # print(receiver_email)
+    print(sender_email)
+    print(sender_email)
+    print(sender_email)
+    print(sender_email)
+    print(sender_password)
+    print(sender_password)
+    print(sender_password)
+    print(sender_password)
+    print(sender_password)
+    
     subject = "New user sign-up request"
     message=f"'yOU CAN ABLE TO SET PASSWORD THROUGH THIS'  http://127.0.0.1:5000/password?email={receiver_email}"
     print(message)
@@ -112,7 +144,7 @@ def create_db(data):
     print(encode_email)
     print(encode_email)
 
-    if users_data is not None and data["username"] in users_data :
+    if users_data is not None and data["email"] in users_data :
         print("User with email already exists.")
     else:
         # Set the user data with the encoded email as the key
@@ -120,22 +152,6 @@ def create_db(data):
         db.child("company_users").child(encode_email).set(data)
         print("User added successfully.")
  
-
-# def create_db(data):
-#     # db.child("company_users").child(data["username"]).set(data)
-
-#     users=db.child("company_users")#LIST OF USERS ADDED IN THE REALTIME DATABASE
-#     users_data = users.get().val()
-#     encoded_email = quote(data["email"], safe="")
-#     print(encoded_email)
-#     print(users_data)
-
-#     if users_data is not None and encoded_email in users_data:
-#         print("Username exists.")
-#     else:
-#         data["status"]="None"
-#         db.child("company_users").child(encoded_email).set(data)
-#         print("Username does not exist.")
 
 def approve(action,user_id):
 
@@ -151,11 +167,22 @@ def approve(action,user_id):
     else:
         return "invalid option"
     
-def user_info(email):
+def user_info(encoded_mail):
     # Get the data from the Realtime Database
-    user = db.child("company_users").child(email)
+    user = db.child("company_users").child(encoded_mail)
     user_data = user.get().val()
     return user_data
+def update_user_info(encodeed_mail,data_to_update):
+#     data_to_update = {
+#     "company_id": "2312",
+#     "company_name": "asdasd",
+#     "email": "nakult721@gmail.com",
+#     "requter_name": "asdsad",
+#     "status": "approved",
+#     "username": "Nakulan"
+# }
+    updated=db.child("company_users").child(encodeed_mail).update(data_to_update)
+    return updated
 
 def display_data():
     # Get the data from the Realtime Database
@@ -191,29 +218,3 @@ def forgot_password(email):
         return True
     except Exception as e:
         print('error',str(e))
-
-
-
-
-# s=sign_in("t.r.shyam0007@gmail.com","shyam1134")
-# print(s)
-# user_data = {
-#         "username": "shymeaah",
-#         "email": "shyam113232",
-#         "password": "sddfgteow3784ry89723yr78w34ry w47890rty780w3gryq3"
-#         }
-# create_db(user_data)
-# # display_data()
-
-
-
-
-
-# username="sweiufhjs"
-# email= "shaa@gmail.com"
-# password="123456789987654321"
-
-
-# s=sign_in(email,password)
-# if sign_in(email,password)==True:
-#     print("user signed is")

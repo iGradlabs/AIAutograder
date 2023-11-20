@@ -20,15 +20,19 @@ app.config['SESSION_TYPE'] =  session_type
 
 
 
-
+@app.context_processor
+def inject_userinfo():
+    if 'user_info' in session and 'first_name' in session['user_info']:
+        username = session['user_info']['first_name']
+        return dict(username=username)
+    else:
+        return {'username': None} 
 
 @app.route('/')
 def index():
     if 'email' in session:
         print(session)
-        # print(email_send.display_data())
-
-        return render_template('dashboard.html',username=session['user_info']['username'])
+        return render_template('dashboard.html')
     else:
         return redirect(url_for('sign_in'))
 
@@ -40,18 +44,25 @@ def index():
 def sign_up():
 
     if request.method == 'POST':
-        username=request.form['username']
+        first_name=request.form['first_name']
+        last_name=request.form['last_name']
         email=request.form['email']
-        company_name=request.form['company_name']
-        requter_name=request.form['requter_name']
-        company_id=request.form['company_id']
+        phone_number=request.form['phone_number']
+        organization=request.form['organization']
+        zip_code=request.form['zip_code']
+        state=request.form['state']
+        country=request.form['country']
+
 
         user_data = {
-        "username": username,
+        "first_name": first_name,
+        "last_name":last_name,
         "email": email,
-        "company_name":company_name,
-        "requter_name":requter_name,
-        "company_id":company_id
+        "phone_number":phone_number,
+        "organization":organization,
+        "zip_code":zip_code,
+        "state":state,
+        "country":country
         }
         email_send.create_db(user_data)
         email_send.send_mail(user_data)
@@ -109,14 +120,18 @@ def sign_in():
 @app.route("/sign-out", methods=['GET'])
 def sign_out():
     # Clear the user's session to sign them out
-    session.pop('email', None)
+    session.clear()
+    # session.pop('email', None)
     return redirect(url_for('sign_in'))
+
 
 @app.route("/admin-auth", methods=['GET'])
 def admin_auth():
     # email_send.approve(action,user_id)
     usersData=email_send.display_data()
     return render_template('admin-auth.html',usersData=usersData)
+
+
 
 @app.route('/password',methods=['POST','GET'])
 def passwordPage():
@@ -186,6 +201,12 @@ def notifications():
 def schedule_interview():
     return render_template('schedule_interview.html')
 
+@app.route('/myProfile',methods=['POST','GET'])
+def myProfile():
+
+    user_info=session['user_info']
+    
+    return render_template('account/myProfil.html',user_info=user_info)
 
 
 
