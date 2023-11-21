@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {%block content%}
 <div class="m-5">
-
+<h2>{{user_info}}</h2>
   <div class="card mb-4">
     <h5 class="card-header">Profile Details</h5>
     <!-- Account -->
@@ -38,7 +38,7 @@
     </div>
     <hr class="my-0" />
     <div class="card-body">
-      <form id="formAccountSettings" method="POST" onsubmit="return false">
+      <form id="formAccountSettings" action="/myProfile" method="POST" >
         <div class="row">
           <div class="mb-3 col-md-6">
             <label for="firstName" class="form-label">First Name</label>
@@ -67,8 +67,7 @@
               type="text"
               id="email"
               name="email"
-              value="john.doe@example.com"
-              placeholder={{user_info.email}}
+              value={{user_info.email}}
             />
           </div>
           <div class="mb-3 col-md-6">
@@ -120,7 +119,7 @@
           </div>
           <div class="mb-3 col-md-6">
             <label class="form-label" for="country">Country</label>
-            <select id="country" class="select2 form-select">
+            <select id="country" name="country" class="select2 form-select">
               <option selected="selected" data-select2-id="18">{{user_info.country}}</option>
 
               
@@ -153,8 +152,8 @@
 
         </div>
         <div class="mt-2">
-          <button type="submit" class="btn btn-primary me-2">Save changes</button>
-          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+          <button type="submit" name='action' value="save" class="btn btn-primary me-2">Save changes</button>
+          <button type="submit" name='action' value="reset" class="btn btn-outline-secondary">Cancel</button>
         </div>
       </form>
     </div>

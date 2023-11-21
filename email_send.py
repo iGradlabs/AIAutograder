@@ -167,22 +167,16 @@ def approve(action,user_id):
     else:
         return "invalid option"
     
-def user_info(encoded_mail):
+def user_info(encoded_mail,new_data=None):
     # Get the data from the Realtime Database
     user = db.child("company_users").child(encoded_mail)
-    user_data = user.get().val()
-    return user_data
-def update_user_info(encodeed_mail,data_to_update):
-#     data_to_update = {
-#     "company_id": "2312",
-#     "company_name": "asdasd",
-#     "email": "nakult721@gmail.com",
-#     "requter_name": "asdsad",
-#     "status": "approved",
-#     "username": "Nakulan"
-# }
-    updated=db.child("company_users").child(encodeed_mail).update(data_to_update)
-    return updated
+    if new_data is None:
+        user_data = user.get().val()
+        return user_data
+    else:
+        user_data=user.update(new_data)
+        return user_data
+
 
 def display_data():
     # Get the data from the Realtime Database

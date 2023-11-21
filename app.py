@@ -205,6 +205,27 @@ def schedule_interview():
 def myProfile():
 
     user_info=session['user_info']
+
+    if request.method == 'POST':
+
+        if request.form['action']=='save':
+            new_data={
+                "first_name":request.form["firstName"],
+                "last_name":request.form["lastName"],
+                "country":request.form["country"],
+                "email":request.form["email"],
+                "phone_number":request.form["phoneNumber"] ,
+                "state":request.form["state"],
+                "zip_code":request.form["zipCode"],
+                "organization":request.form["organization"]
+            }
+            # country=request.form['country']
+            user_info=email_send.user_info(encoded_mail=ed_email.encode_email(session['user_info']['email']),new_data=new_data)
+
+            
+            
+        if request.form['action']=='reset':
+            return render_template('account/myProfil.html',user_info=user_info)
     
     return render_template('account/myProfil.html',user_info=user_info)
 
