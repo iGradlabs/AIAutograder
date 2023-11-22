@@ -221,6 +221,7 @@ def myProfile():
             }
             # country=request.form['country']
             user_info=email_send.user_info(encoded_mail=ed_email.encode_email(session['user_info']['email']),new_data=new_data)
+            session['user_info']=user_info
 
             
             

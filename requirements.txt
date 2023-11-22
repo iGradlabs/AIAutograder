@@ -2,3 +2,4 @@ Flask
 pyrebase4
 Flask-Session
 python-dotenv
+gunicorn
