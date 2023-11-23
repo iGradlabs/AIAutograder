@@ -1,0 +1,342 @@
+[
+    [
+        {
+            "ID": 457,
+            "Marks": 1,
+            "Question_Text": "What is the time complexity of the selection sort algorithm?",
+            "Options": [
+                "O(log n)",
+                "O(n)",
+                "O(n^2)",
+                "O(1)"
+            ]
+        },
+        {
+            "ID": 193,
+            "Marks": 1,
+            "Question_Text": "What is the output of the following code snippet?\n\n```python\nmy_dict = {'a': 1, 'b': 2, 'c': 3}\nresult = my_dict.pop('b')\n```",
+            "Options": [
+                "2",
+                "Error",
+                "1",
+                "3"
+            ]
+        },
+        {
+            "ID": 496,
+            "Marks": 1,
+            "Question_Text": "What is the time complexity of the Karger's algorithm for finding a minimum cut in a graph?",
+            "Options": [
+                "O(V^2)",
+                "O(EV)",
+                "O(V^3)",
+                "O(VE)"
+            ]
+        },
+        {
+            "ID": 456,
+            "Marks": 1,
+            "Question_Text": "Which algorithm is used to find the minimum spanning tree of a weighted graph?",
+            "Options": [
+                "Dijkstra's Algorithm",
+                "Breadth-First Search",
+                "Prim's Algorithm",
+                "Kruskal's Algorithm"
+            ]
+        },
+        {
+            "ID": 321,
+            "Marks": 1,
+            "Question_Text": "What is the result of trying to perform an operation on two incompatible data types in Python?",
+            "Options": [
+                "TypeError",
+                "ValueError",
+                "SyntaxError",
+                "RuntimeError"
+            ]
+        },
+        {
+            "ID": 485,
+            "Marks": 1,
+            "Question_Text": "What is the main purpose of the Dijkstra's algorithm?",
+            "Options": [
+                "Finding the maximum element in a list",
+                "Finding the shortest path in a weighted graph",
+                "Solving the assignment problem",
+                "Traversing or searching a tree or graph data structure"
+            ]
+        },
+        {
+            "ID": 310,
+            "Marks": 1,
+            "Question_Text": "What is the result of trying to import a module that does not exist in Python?",
+            "Options": [
+                "ModuleNotFoundError",
+                "ImportError",
+                "NameError",
+                "RuntimeError"
+            ]
+        },
+        {
+            "ID": 58,
+            "Marks": 1,
+            "Question_Text": "What is the output of the following code snippet?\n\n```python\nx = 15\nif x < 10:\n    if x == 5:\n        print('x is 5')\nelse:\n    if x > 10 and x <= 15:\n        print('x is between 10 and 15')\n    else:\n        print('x is greater than 15')\n```",
+            "Options": [
+                "x is between 10 and 15",
+                "x is 5",
+                "x is greater than 15",
+                "None of the above"
+            ]
+        },
+        {
+            "ID": 174,
+            "Marks": 1,
+            "Question_Text": "What is the output of the following code snippet?\n\n```python\ndict = {'a': 1, 'b': 2, 'c': 3}\nprint(len(dict))\n```",
+            "Options": [
+                "3",
+                "6",
+                "Error",
+                "None"
+            ]
+        },
+        {
+            "ID": 458,
+            "Marks": 1,
+            "Question_Text": "Which algorithm is used to traverse or search a tree or graph data structure?",
+            "Options": [
+                "Dijkstra's Algorithm",
+                "Breadth-First Search",
+                "Depth-First Search",
+                "Prim's Algorithm"
+            ]
+        },
+        {
+            "ID": 179,
+            "Marks": 1,
+            "Question_Text": "What is the output of the following code snippet?\n\n```python\ndict = {'a': 1, 'b': 2, 'c': 3}\nvalues = dict.values()\nprint(values)\n```",
+            "Options": [
+                "dict_values([1, 2, 3])",
+                "[1, 2, 3]",
+                "(1, 2, 3)",
+                "Error"
+            ]
+        },
+        {
+            "ID": 195,
+            "Marks": 1,
+            "Question_Text": "What is the output of the following code snippet?\n\n```python\nmy_dict = {'a': 1, 'b': 2, 'c': 3}\nvalues = my_dict.values()\nprint(values)\n```",
+            "Options": [
+                "dict_values([1, 2, 3])",
+                "[1, 2, 3]",
+                "(1, 2, 3)",
+                "Error"
+            ]
+        },
+        {
+            "ID": 197,
+            "Marks": 1,
+            "Question_Text": "What is the output of the following code snippet?\n\n```python\nmy_dict = {'a': 1, 'b': 2, 'c': 3}\nkeys = my_dict.keys()\nprint(my_dict.get('d', 0))\n```",
+            "Options": [
+                "0",
+                "1",
+                "2",
+                "Error"
+            ]
+        },
+        {
+            "ID": 486,
+            "Marks": 1,
+            "Question_Text": "What is the time complexity of the Tarjan's algorithm for finding the strongly connected components in a directed graph?",
+            "Options": [
+                "O(V+E)",
+                "O(V^2)",
+                "O(E log V)",
+                "O(V log V)"
+            ]
+        },
+        {
+            "ID": 474,
+            "Marks": 1,
+            "Question_Text": "Which algorithm is used for finding the strongly connected components in a directed graph?",
+            "Options": [
+                "Dijkstra's Algorithm",
+                "Kruskal's Algorithm",
+                "Tarjan's Algorithm",
+                "Floyd-Warshall Algorithm"
+            ]
+        },
+        {
+            "ID": 39,
+            "Marks": 1,
+            "Question_Text": "What is the result of the following expression?\n\n```python\n4 != 4\n```",
+            "Options": [
+                "True",
+                "False",
+                "Error",
+                "None"
+            ]
+        },
+        {
+            "ID": 41,
+            "Marks": 1,
+            "Question_Text": "What is the output of the following code snippet?\n\n```python\nx = 10\nif x < 5:\n    print('x is less than 5')\nelif x == 5:\n    print('x is 5')\nelse:\n    print('x is greater than 5')\n```",
+            "Options": [
+                "x is less than 5",
+                "x is 5",
+                "x is greater than 5",
+                "None of the above"
+            ]
+        },
+        {
+            "ID": 466,
+            "Marks": 1,
+            "Question_Text": "What is the main purpose of the Floyd-Warshall algorithm?",
+            "Options": [
+                "Finding the maximum element in a list",
+                "Finding the shortest path between all pairs of nodes in a weighted graph",
+                "Searching for a specific element in a sorted list",
+                "Traversing or searching a tree or graph data structure"
+            ]
+        },
+        {
+            "ID": 188,
+            "Marks": 1,
+            "Question_Text": "Which of the following methods is used to check if an element is present in a set in Python?",
+            "Options": [
+                "contains()",
+                "exists()",
+                "inset()",
+                "in"
+            ]
+        },
+        {
+            "ID": 175,
+            "Marks": 1,
+            "Question_Text": "Which of the following is a valid way to remove a key from a dictionary in Python?",
+            "Options": [
+                "del dict['key']",
+                "dict.remove('key')",
+                "dict.pop('key')",
+                "dict.clear()"
+            ]
+        },
+        {
+            "ID": 493,
+            "Marks": 1,
+            "Question_Text": "What is the main purpose of the Rabin-Karp algorithm?",
+            "Options": [
+                "Finding the maximum element in a list",
+                "String matching and pattern recognition",
+                "Solving systems of linear equations",
+                "Optimizing the selection of items given a weight constraint"
+            ]
+        },
+        {
+            "ID": 478,
+            "Marks": 1,
+            "Question_Text": "What is the main purpose of the traveling salesman problem?",
+            "Options": [
+                "Finding the maximum element in a list",
+                "Finding the shortest path between all pairs of nodes in a weighted graph",
+                "Optimizing the selection of items given a weight constraint",
+                "Traversing or searching a tree or graph data structure"
+            ]
+        },
+        {
+            "ID": 38,
+            "Marks": 1,
+            "Question_Text": "What will be the value of `x` after the following code is executed?\n\n```python\nx = 0\nif x > 0:\n    x = 1\nelif x < 0:\n    x = -1\nelse:\n    x = 10\n```",
+            "Options": [
+                "0",
+                "1",
+                "-1",
+                "10"
+            ]
+        },
+        {
+            "ID": 323,
+            "Marks": 1,
+            "Question_Text": "What is the result of trying to delete a variable that has not been defined in Python?",
+            "Options": [
+                "NameError",
+                "ValueError",
+                "TypeError",
+                "RuntimeError"
+            ]
+        },
+        {
+            "ID": 316,
+            "Marks": 1,
+            "Question_Text": "What is the result of trying to open a file that does not exist in Python?",
+            "Options": [
+                "FileNotFoundError",
+                "ValueError",
+                "FileError",
+                "TypeError"
+            ]
+        }
+    ],
+    [
+        {
+            "ID": 744,
+            "Marks": 5,
+            "Question_Text": "Create a Python function to calculate the factorial of a non-negative integer."
+        },
+        {
+            "ID": 487,
+            "Marks": 5,
+            "Question_Text": "Create a Python program that connects to a remote API. Handle 'requests.exceptions.Timeout' exceptions and implement a retry mechanism."
+        },
+        {
+            "ID": 162,
+            "Marks": 10,
+            "Question_Text": "Write a Python program to find the difference between two sets."
+        },
+        {
+            "ID": 165,
+            "Marks": 10,
+            "Question_Text": "Write a Python program to find the difference between two sets."
+        },
+        {
+            "ID": 47,
+            "Marks": 10,
+            "Question_Text": "Write a Python program to find the GCD of two numbers using Euclidean algorithm."
+        },
+        {
+            "ID": 838,
+            "Marks": 5,
+            "Question_Text": "Create a Python program to find the common elements in two arrays."
+        },
+        {
+            "ID": 475,
+            "Marks": 5,
+            "Question_Text": "Create a Python program that performs a series of file operations (e.g., copy, move, delete). Handle 'OSError' exceptions and provide appropriate error messages."
+        },
+        {
+            "ID": 778,
+            "Marks": 5,
+            "Question_Text": "Create a Python dictionary that maps cities to their populations."
+        },
+        {
+            "ID": 469,
+            "Marks": 5,
+            "Question_Text": "Create a Python program that simulates a network connection. Handle 'ConnectionError' exceptions and retry the connection if it fails."
+        },
+        {
+            "ID": 493,
+            "Marks": 5,
+            "Question_Text": "Create a Python program that interacts with a database. Handle 'pymysql.Error' exceptions for database connectivity and queries."
+        },
+        {
+            "ID": 820,
+            "Marks": 5,
+            "Question_Text": "Write a Python program to reverse an array in-place."
+        },
+        {
+            "ID": 828,
+            "Marks": 5,
+            "Question_Text": "Create a Python program to merge two dictionaries, giving priority to values from one dictionary when there are key conflicts."
+        }
+    ],
+    []
+]
