@@ -25,11 +25,6 @@ config={
 }
 
 
-# configraw="firebase.json"
-# with open(configraw, "r") as file:
-#     # Load the JSON data into a Python variable
-#     config= json.load(file)
-# print(config)
 
 firebase = pyrebase.initialize_app(config)  
 db=firebase.database()
@@ -43,8 +38,8 @@ def send_mail(data):
     smtp_port = 587
 
     # Set up the email message
-    sender_email = "t.r.shyam0007@gmail.com"#consided as webpage mail
-    sender_password="fvam btzk exbf ivxz"
+    sender_email = sender_mail_id #consided as webpage mail
+    sender_password=sender_mail_password
     receiver_email = "ktraveendran25@gmail.com"#consided as college
     subject = "New user sign-up request"
     message =f'''
@@ -129,28 +124,17 @@ def sendMail_requi(email):
 
 
 
-def create_db(data):
+def create_db(data):   
 
-    users = db.child("company_users")
-    users_data = users.get().val()
+    # print(data)
+    user_data=data.copy()
+    user_data.pop('user_id')
+    # print(data['user_id'])
+    # print(user_data)
+    db.child("company_users").child(data['user_id']).set(user_data)
+    
 
-    encode_email=ed_email.encode_email(data["email"])
-    print(encode_email)
-    print(encode_email)
-    print(encode_email)
-    print(encode_email)
-    print(encode_email)
-    print(encode_email)
-    print(encode_email)
-    print(encode_email)
 
-    if users_data is not None and data["email"] in users_data :
-        print("User with email already exists.")
-    else:
-        # Set the user data with the encoded email as the key
-        data["status"] = "None"
-        db.child("company_users").child(encode_email).set(data)
-        print("User added successfully.")
  
 
 def approve(action,user_id):
@@ -167,9 +151,9 @@ def approve(action,user_id):
     else:
         return "invalid option"
     
-def user_info(encoded_mail,new_data=None):
+def user_info(user_id,new_data=None):
     # Get the data from the Realtime Database
-    user = db.child("company_users").child(encoded_mail)
+    user = db.child("company_users").child(user_id)
     if new_data is None:
         user_data = user.get().val()
         return user_data
