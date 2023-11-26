@@ -177,6 +177,15 @@ def create_user_id(email,password):
             print("Error creating user:", str(e))
             return None
 
+def deleteUser(user_id):
+    try:
+        db.child("company_users").child(user_id).remove()
+        return True
+    except Exception as e:
+        print('error deleting user',str(e))
+
+
+
 def sign_in(email,password):
     try:
         user = auth.sign_in_with_email_and_password(email,password)

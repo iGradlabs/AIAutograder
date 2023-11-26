@@ -33,6 +33,7 @@ def create_tables():
 
 
 
+
 @app.context_processor
 def inject_userinfo():
     if 'user_info' in session and 'first_name' in session['user_info']:
@@ -125,16 +126,16 @@ def sign_in():
     if request.method == 'POST':
         email = request.form['email-username']
         password = request.form['password']
+        remember_me = request.form.get('remember_me')
         print(email, password)
         
-        user = User.query.filter_by(email=email).first()
-        user_id=user.user_id
+        user_id = User.query.filter_by(email=email).first().user_id
         user_info=email_send.user_info(user_id)
         valid_credentials = email_send.sign_in(email, password)
 
 
         if valid_credentials:
-            session['email'] = email
+            session['email'] = email if remember_me else None
             session['is_admin'] = False
             session['user_id']=user_id
             session['user_info']=user_info
@@ -156,6 +157,7 @@ def sign_in():
         return render_template('auth-login-basic.html', error=error_message)
 
     return render_template('auth-login-basic.html')
+
 
 
 @app.route("/sign-out", methods=['GET'])
@@ -181,7 +183,6 @@ def passwordPage():
     #     print("defhiugewaiufgh",email)
     message = ""  
     if request.method == 'POST':
-        print("heyyyyyyyyyyyyyyyy")
         password=request.form['password']
         ConPassword=request.form['ConformPassword']
         if password==ConPassword:
@@ -277,7 +278,27 @@ def myProfile():
     
     return render_template('account/myProfil.html',user_info=user_info)
 
+@app.route('/myProfile/Deactivate',methods=['POST','GET'])
+def deactivate():
+    if request.method == 'POST':
+        Deactivate=request.form.get('Deactivation')
+        print(Deactivate)
+        # print(session['user_id'])
+        # print(session['user_id'])
+        # print(session['user_id'])
+        # print(session['user_id'])
+        # print(session['user_id'])
 
+        # return redirect(url_for('sign_up'))
+        if request.form.get('Deactivation') != None:
+            
+            print(session['user_id'])
+            print(session['user_id'])
+            email_send.deleteUser(session['user_id'])
+            session.clear()
+            return redirect(url_for("sign_in"))
+        else:
+            return redirect(url_for("myProfile"))
 
 if __name__ == '__main__':
     create_tables()  
