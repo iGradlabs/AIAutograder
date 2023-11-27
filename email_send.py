@@ -1,7 +1,6 @@
 import smtplib
 from email.mime.text import MIMEText
 import pyrebase
-import ed_email
 from urllib.parse import quote
 import os
 from dotenv import load_dotenv
