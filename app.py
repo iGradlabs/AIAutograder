@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session,flash
-import email_send,ed_email
+import email_send 
 from flask_session import Session
 from dotenv import load_dotenv
 from sqlAlcamy import db, User
@@ -11,6 +11,7 @@ load_dotenv()
 # Access the variables
 secret_key = os.getenv("SECRET_KEY")
 session_type = os.getenv("SESSION_TYPE")
+Database_Url=os.getenv("DATABASE_URL")
 admin_emails = [ str(x) for x in str(os.getenv("ADMIN_MAIL_ID")).split(',')]
 
 # flask app namess
@@ -22,7 +23,7 @@ app.config['SESSION_TYPE'] =  session_type
 
 # sqlalchemy setup
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = Database_Url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
@@ -83,6 +84,7 @@ def sign_up():
             user_data['user_id']=user_id
             print(user_data)
             email_send.create_db(user_data)
+            return redirect (url_for('sign_in'))
         except Exception as error:
             db.session.rollback()
             w=str(error.orig)
@@ -93,7 +95,7 @@ def sign_up():
             elif 'user.username' in w:
                 print("Username already exist")
             else:
-                print("error occured")
+                print("error occured",error)
         
          
 

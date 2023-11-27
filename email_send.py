@@ -132,6 +132,11 @@ def create_db(data):
     # print(data['user_id'])
     # print(user_data)
     db.child("company_users").child(data['user_id']).set(user_data)
+    print("fb created")
+    print("fb created")
+    print("fb created")
+    print("fb created")
+    print("fb created")
     
 
 
@@ -205,3 +210,5 @@ def forgot_password(email):
         return True
     except Exception as e:
         print('error',str(e))
+# psql 'postgresql://TRshyam:CbzGc1T3mtnp@ep-sparkling-wave-85770255.ap-southeast-1.aws.neon.tech/neondb?sslmode=require'
+# psql 'postgresql://TRshyam:CbzGc1T3mtnp@ep-sparkling-wave-85770255.ap-southeast-1.aws.neon.tech/neondb?sslmode=require'
