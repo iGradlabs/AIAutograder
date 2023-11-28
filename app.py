@@ -11,7 +11,8 @@ load_dotenv()
 # Access the variables
 secret_key = os.getenv("SECRET_KEY")
 session_type = os.getenv("SESSION_TYPE")
-Database_Url=os.getenv("DATABASE_URL")
+# Database_Url=os.getenv("DATABASE_URL")
+Database_Url="sqlite:////CODING/#AiPro/AIAutograder/instance/example.db"
 admin_emails = [ str(x) for x in str(os.getenv("ADMIN_MAIL_ID")).split(',')]
 
 # flask app namess
@@ -32,9 +33,6 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
-
-
-
 @app.context_processor
 def inject_userinfo():
     if 'user_info' in session and 'first_name' in session['user_info']:
@@ -52,8 +50,6 @@ def index():
         return redirect(url_for('sign_in'))
 
     
-
-
 
 @app.route('/auth-register-basic.html',methods=['POST','GET'])
 def sign_up():
