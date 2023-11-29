@@ -11,8 +11,8 @@ load_dotenv()
 # Access the variables
 secret_key = os.getenv("SECRET_KEY")
 session_type = os.getenv("SESSION_TYPE")
-# Database_Url=os.getenv("DATABASE_URL")
-Database_Url="sqlite:///./instance/example.db"
+Database_Url=os.getenv("DATABASE_URL")
+# Database_Url="sqlite:///./instance/example.db"
 admin_emails = [ str(x) for x in str(os.getenv("ADMIN_MAIL_ID")).split(',')]
 
 # flask app namess
