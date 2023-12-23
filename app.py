@@ -257,12 +257,13 @@ def deactivate():
     if request.method == 'POST':
         Deactivate=request.form.get('Deactivation')
         print(Deactivate)
-        
+
         if request.form.get('Deactivation') != None:
             
             print(session['user_id'])
             print(session['user_id'])
             email_send.deleteUser(session['user_id'])
+            delete_user_by_id(session['user_id'])
             session.clear()
             return redirect(url_for("sign_in"))
         else:
