@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session,fl
 import email_send 
 from flask_session import Session
 from dotenv import load_dotenv
-from sqlAlcamy import db, User,creat_sql_database,get_user_id,delete_user_by_id
+from sqlAlcamy import db, User,creat_sql_database,get_user_id,delete_user_by_id,update_user
 
 
 load_dotenv()
@@ -242,7 +242,14 @@ def myProfile():
                 "zip_code":request.form["zipCode"],
                 "organization":request.form["organization"]
             }
+            # User.update_user(new_username='NewUsername', new_email='newemail@example.com', new_selected_candidates='New candidates', new_exams_generated=5)
+
+
+            # print(user.update_user(new_username=new_data['first_name'],new_email=new_data['email']))
+            update_user(session['user_id'],new_username=new_data['first_name'],email=new_data['email'])
             user_info=email_send.user_info(session['user_id'],new_data=new_data)
+            # User.update_user(new_username='NewUsername', new_email='newemail@example.com', new_selected_candidates='New candidates', new_exams_generated=5)
+
             session['user_info']=user_info
 
             

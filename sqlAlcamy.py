@@ -3,10 +3,7 @@ import os
 from dotenv import load_dotenv
 
 
-# Access the variables
-secret_key = os.getenv("SECRET_KEY")
-session_type = os.getenv("SESSION_TYPE")
-Database_Url=os.getenv("DATABASE_URL")
+
 
 # Creating the SQLAlchemy database object
 db = SQLAlchemy()
@@ -24,6 +21,8 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+    
+
 
 
 def creat_sql_database(user_data):
@@ -44,3 +43,28 @@ def delete_user_by_id(user_id):
         db.session.commit()
         return True  # Deletion successful
     return False 
+
+def update_user(user_id, new_username,email):
+    user = User.query.get(user_id)
+    if user:
+        user.username = new_username
+        user.email= email
+        db.session.commit()
+        return True  # Update successful
+    return False  # User not found or update failed
+
+# def update_user(new_username=None, new_email=None, new_selected_candidates=None, new_exams_generated=None):
+#     if new_username:
+#         user.username = new_username    
+#     if new_username:
+#         user.username = new_username    
+#     if new_username:
+#         user.new_selected_candidates = new_username    
+#     if new_exams_generated:
+#         user.new_exams_generated = new_exams_generated    
+    
+# \
+#         if new_exams_generated is not None:
+#             self.exams_generated = new_exams_generated
+
+#         db.session.commit()
