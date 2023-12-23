@@ -32,6 +32,7 @@
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.css') }}" />
 
+
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-default.css') }}" class="template-customizer-theme-css" />
@@ -128,38 +129,38 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item {% if page in ['home', ''] %}active{% endif %}">
               <a href="/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {% if page == 'filter_candidates' %}active{% endif %}">
               <a href="/filter_candidates" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Filter candidates 
                 </div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {% if page == 'schedule_interview' %}active{% endif %}">
               <a href="/schedule_interview" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Schedule Interview</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {% if page == 'create_learning_path' %}active{% endif %}">
               <a href="/create_learning_path" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Create learning path</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {% if page == 'job_posting' %}active{% endif %} ">
               <a href="/job_posting" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Job posting</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {% if page == 'notifications' %}active{% endif %}" >
               <a href="/notifications" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Notifications</div>
@@ -201,17 +202,7 @@
           
             <ul class="navbar-nav flex-row align-items-center ms-auto">
               <!-- Place this tag where you want the button to render. -->
-              <li class="nav-item lh-1 me-3">
-                <a
-                  class="github-button"
-                  href="https://github.com/themeselection/sneat-html-admin-template-free"
-                  data-icon="octicon-star"
-                  data-size="large"
-                  data-show-count="true"
-                  aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                  >Star</a
-                >
-              </li>
+
           
               <!-- User -->
               <li class="nav-item navbar-dropdown dropdown-user dropdown">

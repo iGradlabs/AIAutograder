@@ -1,4 +1,4 @@
-Flask
+flask
 pyrebase4
 Flask-Session
 python-dotenv

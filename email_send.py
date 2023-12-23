@@ -20,7 +20,7 @@ config={
   "storageBucket": "aiauto-7cc64.appspot.com",
   "messagingSenderId": "447608317094",
   "appId": "1:447608317094:web:83634606c2d1800563c067",
-  "measurementId": "G-PCE3YXT91M",
+  "measurementId": "G-PCE3YXT91M"
 }
 
 
@@ -39,7 +39,7 @@ def send_mail(data):
     # Set up the email message
     sender_email = sender_mail_id #consided as webpage mail
     sender_password=sender_mail_password
-    receiver_email = "ktraveendran25@gmail.com"#consided as college
+    receiver_email = "eniyans644@gmail.com"#consided as college
     subject = "New user sign-up request"
     message =f'''
     Username: {data['first_name']}\n 
@@ -75,42 +75,24 @@ def sendMail_requi(email):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
     reciverMail=email
-    print(reciverMail,"sdioddhjidj")
-    print(reciverMail,"sdioddhjidj")
-    print(reciverMail,"sdioddhjidj")
-    print(reciverMail,"sdioddhjidj")
-    print(reciverMail,"sdioddhjidj")
-    print(email)
-    print(email)
-    print(email)
-    print(email)
-
-
 
     sender_email = sender_mail_id#consided as webpage mail
     
     sender_password= sender_mail_password
     receiver_email = reciverMail #consided as college
     # print(receiver_email)
-    print(sender_email)
-    print(sender_email)
-    print(sender_email)
-    print(sender_email)
-    print(sender_password)
-    print(sender_password)
-    print(sender_password)
-    print(sender_password)
-    print(sender_password)
     
     subject = "New user sign-up request"
     message=f"'yOU CAN ABLE TO SET PASSWORD THROUGH THIS'  http://127.0.0.1:5000/password?email={receiver_email}"
-    print(message)
+    # print(message)
+
     #     #<<<----- Set up the MIME message ---->>>
     msg = MIMEText(message)
     msg["Subject"] = subject
     msg["From"] = sender_email
     msg["To"] = receiver_email
     #<<<----- Set up the MIME message ---->>>
+    
        # Send the email
     server = smtplib.SMTP(smtp_server, smtp_port)
     server.starttls()
@@ -124,22 +106,8 @@ def sendMail_requi(email):
 
 
 def create_db(data):   
-
-    # print(data)
-    user_data=data.copy()
-    user_data.pop('user_id')
-    # print(data['user_id'])
-    # print(user_data)
-    db.child("company_users").child(data['user_id']).set(user_data)
-    print("fb created")
-    print("fb created")
-    print("fb created")
-    print("fb created")
-    print("fb created")
+    db.child("company_users").child(data['user_id']).set(data)
     
-
-
- 
 
 def approve(action,user_id):
 
@@ -164,13 +132,15 @@ def user_info(user_id,new_data=None):
     else:
         user_data=user.update(new_data)
         return user_data
-
-
+    
+    
 def display_data():
     # Get the data from the Realtime Database
-    user = db.child("company_users").child()
+    user = db.child('company_users')
     user_data = user.get().val()
     return user_data
+
+
 
 def create_user_id(email,password):  
         try:

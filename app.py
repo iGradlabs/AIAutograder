@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session,fl
 import email_send 
 from flask_session import Session
 from dotenv import load_dotenv
-from sqlAlcamy import db, User
+from sqlAlcamy import db, User,creat_sql_database,get_user_id,delete_user_by_id
 
 
 load_dotenv()
@@ -44,8 +44,9 @@ def inject_userinfo():
 @app.route('/')
 def index():
     if 'email' in session:
+
         print(session)
-        return render_template('dashboard.html')
+        return render_template('dashboard.html', page='home')
     else:
         return redirect(url_for('sign_in'))
 
@@ -63,23 +64,25 @@ def sign_up():
         "email": request.form['email'],
         "phone_number":request.form['phone_number'],
         "organization":request.form['organization'],
-        "zip_code":['zip_code'],
+        "zip_code":request.form['zip_code'],
         "state":request.form['state'],
         "country":request.form['country'],
         "status": "None"
         }
 
-        user_data_sql=User(email=user_data['email'],username=user_data['first_name'])
-        db.session.add(user_data_sql)
-        # # db.session.commit()
-
         try:
-            db.session.commit()
-            user = User.query.filter_by(email=user_data['email']).first()
-            user_id=user.user_id
+            #create user data in Sql
+            creat_sql_database(user_data)
+
+            #get user id from sql 
+            user_id=get_user_id(user_data['email'])
             user_data['user_id']=user_id
             print(user_data)
+
+            #create db in firebase & send mail to college
             email_send.create_db(user_data)
+            email_send.send_mail(user_data)
+
             return redirect (url_for('sign_in'))
         except Exception as error:
             db.session.rollback()
@@ -92,27 +95,6 @@ def sign_up():
                 print("Username already exist")
             else:
                 print("error occured",error)
-        
-         
-
-
-
-
-        # error=email_send.create_db(user_data)
-        # if error=="User with email already exists.":
-        #     print(error)
-        #     print(error)
-        #     print(error)
-        #     return render_template('auth-register-basic.html', error=error)
-        # else:
-        #     user_sql_data=User(email=user_data['email'],username=user_data['first_name'])
-        #     db.session.add(user_sql_data)
-        #     db.session.commit()
-        #     # email_send.send_mail(user_data)
-        #     return redirect(url_for('sign_in'))
-
-        
-
     return render_template('auth-register-basic.html')
 
 
@@ -124,16 +106,17 @@ def sign_in():
     if request.method == 'POST':
         email = request.form['email-username']
         password = request.form['password']
-        remember_me = request.form.get('remember_me')
-        print(email, password)
+        # remember_me = request.form.get('rememberMe')
+
         
-        user_id = User.query.filter_by(email=email).first().user_id
+        user_id = get_user_id(email)
         user_info=email_send.user_info(user_id)
+
+
         valid_credentials = email_send.sign_in(email, password)
 
-
         if valid_credentials:
-            session['email'] = email if remember_me else None
+            session['email'] = email 
             session['is_admin'] = False
             session['user_id']=user_id
             session['user_info']=user_info
@@ -144,7 +127,7 @@ def sign_in():
 
             if email in admin_emails: # 
                 print(email)
-                # print("admibn")
+
                 session['is_admin'] = True
                 # return redirect(url_for('admin_auth'))
                 return redirect(url_for('index'))
@@ -160,30 +143,25 @@ def sign_in():
 
 @app.route("/sign-out", methods=['GET'])
 def sign_out():
-    # Clear the user's session to sign them out
     session.clear()
-    # session.pop('email', None)
     return redirect(url_for('sign_in'))
 
 
 @app.route("/admin-auth", methods=['GET'])
 def admin_auth():
-    # email_send.approve(action,user_id)
     usersData=email_send.display_data()
-    return render_template('admin-auth.html',usersData=usersData)
-
-
+    return render_template('admin/admin-auth.html',usersData=usersData)
 
 @app.route('/password',methods=['POST','GET'])
 def passwordPage():
-    # if request.method == 'GET':
-    #     email=request.args.get('email')
-    #     print("defhiugewaiufgh",email)
+    
     message = ""  
     if request.method == 'POST':
         password=request.form['password']
         ConPassword=request.form['ConformPassword']
+
         if password==ConPassword:
+            #get email from the weblink
             email=request.args.get('email')
             authPassword=password
             email_send.create_user_id(email,password)
@@ -194,6 +172,7 @@ def passwordPage():
             
     return render_template('password.html',error=message)
 
+
 @app.route('/process/<action>/<user_id>/<email>')
 def process_user(action, user_id,email):
     approvel=email_send.approve(action,user_id)
@@ -201,11 +180,8 @@ def process_user(action, user_id,email):
         # User(email)
         email_send.sendMail_requi(email)
     else:
-        # email_send.sendMail_reject(email)
-        user = User.query.get(user_id)
-        if user:
-            db.session.delete(user)
-            db.session.commit()
+        email_send.sendMail_reject(email)
+        delete_user_by_id(user_id)
 
         print("hey you Fbi open up the door")
     return redirect('/admin-auth')
@@ -230,23 +206,23 @@ def forgot_password():
 
 @app.route('/filter_candidates')
 def filter_candidates():
-    return render_template('Filter_candidates.html')
+    return render_template('Filter_candidates.html', page='filter_candidates')
 
 @app.route('/job_posting')
 def job_posting ():
-    return render_template('job_posting.html')
+    return render_template('job_posting.html',page='job_posting')
 
 @app.route('/create_learning_path')
 def create_learning_path():
-    return render_template('create_learning_path.html')
+    return render_template('create_learning_path.html',page='create_learning_path')
 
 @app.route('/notifications')
 def notifications():
-    return render_template('notifications.html')
+    return render_template('notifications.html',page='notifications')
 
 @app.route('/schedule_interview')
 def schedule_interview():
-    return render_template('schedule_interview.html')
+    return render_template('schedule_interview.html',page='schedule_interview')
 
 @app.route('/myProfile',methods=['POST','GET'])
 def myProfile():
@@ -281,13 +257,7 @@ def deactivate():
     if request.method == 'POST':
         Deactivate=request.form.get('Deactivation')
         print(Deactivate)
-        # print(session['user_id'])
-        # print(session['user_id'])
-        # print(session['user_id'])
-        # print(session['user_id'])
-        # print(session['user_id'])
-
-        # return redirect(url_for('sign_up'))
+        
         if request.form.get('Deactivation') != None:
             
             print(session['user_id'])
