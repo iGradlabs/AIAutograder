@@ -52,19 +52,3 @@ def update_user(user_id, new_username,email):
         db.session.commit()
         return True  # Update successful
     return False  # User not found or update failed
-
-# def update_user(new_username=None, new_email=None, new_selected_candidates=None, new_exams_generated=None):
-#     if new_username:
-#         user.username = new_username    
-#     if new_username:
-#         user.username = new_username    
-#     if new_username:
-#         user.new_selected_candidates = new_username    
-#     if new_exams_generated:
-#         user.new_exams_generated = new_exams_generated    
-    
-# \
-#         if new_exams_generated is not None:
-#             self.exams_generated = new_exams_generated
-
-#         db.session.commit()

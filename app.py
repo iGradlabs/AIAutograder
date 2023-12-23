@@ -55,6 +55,7 @@ def index():
 @app.route('/auth-register-basic.html',methods=['POST','GET'])
 def sign_up():
     # user_data=" "
+    mes=''
     if request.method == 'POST':
 
         user_data = {
@@ -87,15 +88,20 @@ def sign_up():
         except Exception as error:
             db.session.rollback()
             w=str(error.orig)
+            print(w)
             w=w.split()[-1:]
-            if 'user.email' in w:
-                print("Email already exist")
-         
-            elif 'user.username' in w:
-                print("Username already exist")
+            print(w)
+            print(w)
+            print(w)
+
+            if w:
+                mes="User already exist"
+    
+                
             else:
-                print("error occured",error)
-    return render_template('auth-register-basic.html')
+                mes="error occured"
+                
+    return render_template('auth-register-basic.html',mes=mes)
 
 
 
@@ -109,13 +115,14 @@ def sign_in():
         # remember_me = request.form.get('rememberMe')
 
         
-        user_id = get_user_id(email)
-        user_info=email_send.user_info(user_id)
+        
 
 
         valid_credentials = email_send.sign_in(email, password)
 
         if valid_credentials:
+            user_id = get_user_id(email)
+            user_info=email_send.user_info(user_id)
             session['email'] = email 
             session['is_admin'] = False
             session['user_id']=user_id
