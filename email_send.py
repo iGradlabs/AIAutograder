@@ -51,7 +51,7 @@ def send_mail(data):
     state:{data['state']} \n 
     country:{data['country']} 
     
-    http://127.0.0.1:5000/admin-auth'''
+    https://aiautodemo.onrender.com/admin-auth'''
 
 
     #<<<----- Set up the MIME message ---->>>
@@ -83,7 +83,7 @@ def sendMail_requi(email):
     # print(receiver_email)
     
     subject = "New user sign-up request"
-    message=f"'yOU CAN ABLE TO SET PASSWORD THROUGH THIS'  http://127.0.0.1:5000/password?email={receiver_email}"
+    message=f"'yOU CAN ABLE TO SET PASSWORD THROUGH THIS'  https://aiautodemo.onrender.com/password?email={receiver_email}"
     # print(message)
 
     #     #<<<----- Set up the MIME message ---->>>
